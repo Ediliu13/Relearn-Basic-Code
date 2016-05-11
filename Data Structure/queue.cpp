@@ -15,8 +15,10 @@ template<class T> class Queue{
 				next=NULL;
 			}
 		}*front,*rear;
+		int sz;
 	public:
 		Queue(){
+			sz=0;
 			front=rear=NULL;
 		}
 		bool push(T x){
@@ -29,10 +31,12 @@ template<class T> class Queue{
 			}
 			rear=newNode;
 			//success
+			sz++;
 			return 1;
 		}
 		bool pop(){
 			if(front){
+				sz--;
 				Node *mark=front;
 				front=front->next;
 				delete mark;	
@@ -42,6 +46,15 @@ template<class T> class Queue{
 		}
 		bool isEmpty(){
 			return !front;
+		}
+		int getSize(){
+			return sz;
+		}
+		T getFront(){
+			if(front)return front->val;
+		}
+		T getRear(){
+			if(rear)return rear->val;
 		}
 		void print(){
 			if(isEmpty())return;
@@ -59,8 +72,8 @@ int main(){
 	q.push(10);
 	q.push(20);
 	q.push(30);
-	q.pop();
-	q.print();
+	cout<<q.getFront()<<endl;
+	cout<<q.getRear()<<endl;
 }
 
 
